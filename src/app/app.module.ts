@@ -53,6 +53,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AuthService } from "./services/auth.service";
 // @Подключение pipe
 import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { CurrencyComponent } from './components/currency/currency.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    CurrencyComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,13 @@
              (keyup)="searchBook()"
       >
     </div>
+
+    <!--@вставляем компоненту c фильтром валюты-->
+    <div class="col-4">
+      <app-currency></app-currency>
+    </div>
   </div>
+
   <!--@Реализация поиска  *ngIf="!searchText-->
   <div class="row" *ngIf="!searchText">
     <div class="col-4" *ngFor="let book of books">
@@ -21,8 +27,9 @@
         <!--@Стандартный фильтр currency для конвертации в определенные валюты   | currency: 'USD'
         : 'symbol' '4 до точки . 1 один после или 0-2   ' '4.0-2'
         {{book.price | currency: 'USD': 'symbol': '3.0-2'}}
+        @Реагирование на изменение значек в html   | currency: currentCurrency['name']:  и цена там же book.price * currentCurrency['coefficient']
         -->
-        <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price | currency: 'USD': 'symbol': '3.0-2'}}</span></div>
+        <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price * currentCurrency['coefficient'] | currency: currentCurrency['name']: 'symbol': '3.0-2'}}</span></div>
         <span class="text-info">{{book.author}}</span>
         <!--@Приминение в html-->
         <span class="text-primary">{{book.date | customDate: 'ru-Ru': 'short'}}</span>
@@ -43,7 +50,7 @@
       <!--@Реализация поиска  *ngFor="let book of searchingResult" -->
       <div class="col-4" *ngFor="let book of searchingResult">
         <div class="card card-body">
-          <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price | currency: 'USD': 'symbol': '3.0-2'}}</span></div>
+          <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price * currentCurrency['coefficient'] | currency: currentCurrency['name']: 'symbol': '3.0-2'}}</span></div>
           <span class="text-info">{{book.author}}</span>
           <span class="text-primary">{{book.date | customDate: 'ru-Ru': 'short'}}</span>
           <p class="card-text">{{book.description}}</p>
