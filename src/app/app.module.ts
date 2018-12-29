@@ -51,6 +51,8 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { PanelComponent } from "./components/panel/panel.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AuthService } from "./services/auth.service";
+// @Подключение pipe
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 
 
 @NgModule({
@@ -71,7 +73,8 @@ import { AuthService } from "./services/auth.service";
     PanelComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CustomDatePipe
   ],
   imports: [
     BrowserModule,
