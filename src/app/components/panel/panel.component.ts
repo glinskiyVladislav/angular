@@ -9,6 +9,8 @@ import { Book } from "../../models/Book";
 })
 export class PanelComponent implements OnInit  {
   books: Book[];
+  searchingResult: Book[] = [];
+  searchText: string;
 
   constructor(
     public bookService: BooksService
@@ -19,6 +21,12 @@ export class PanelComponent implements OnInit  {
     this.bookService.getBooks().subscribe((books: Book[]) => {
       this.books = books;
     });
+  }
+
+  searchBook() {
+  // @Реализация поиска
+    this.searchingResult = this.books.filter( book => book.name.toLowerCase().indexOf(this.searchText.toLowerCase()) !== -1 );
+    console.log(this.searchingResult);
   }
 
 }

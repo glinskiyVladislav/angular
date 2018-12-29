@@ -49,6 +49,7 @@ http://coldfox.ru/article/5b1adc34179f6e050e0ab806/%D0%9A%D0%B0%D0%BA-%D0%BE%D0%
   @Настройка перехода routerLinkActive routerLinkActiveOptions
 @Firebase
 @Pipe
+@Реализация поиска
 @Модули :
   @Флеш сообщения
   @Bootstrap и fontAwesome
@@ -162,6 +163,12 @@ ng g pipe pipes/custom-date
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
 ---------------------------------------------------------------------------------------------
+---------------------------------------- @Реализация поиска ---------------------------------
+@Реализация поиска
+
+---------------------------------------------------------------------------------------------
+
+
 ------------------------------------------ @Модули ------------------------------------------
 ________________________________________ @Флеш сообщения ____________________________________ 
   @Подключение флеш модуля в app module
