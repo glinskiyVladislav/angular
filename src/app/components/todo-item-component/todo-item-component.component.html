@@ -1,0 +1,24 @@
+<div class="card mt-3"
+     [ngClass]="{
+     'bg-success text-white' : task.completed,
+     'border-warning' : borderState
+     }">
+  <div class="card-body">
+    <!-- @Встроение в разметку полученых данных от родителя -->
+    <p class="card-text">{{ task.title }}</p>
+    <button class="btn btn-primary" *ngIf="!borderState" (click)="editTask()">Edit</button>
+    <button class="btn btn-primary" *ngIf="borderState" (click)="cancelEdit()" >Cancel</button>
+    <!-- @Инициализация удаления в html    (click)="deleteTask()  -->
+    <button class="btn btn-danger" (click)="deleteTask()">Delete</button>
+    <!--
+    @Изменение текста кнопки в зависимости от условия
+    @Изменение css класса в зависимости от условия
+    -->
+    <button class="btn btn-primary"
+            [ngClass]="{
+            'text-warning bg-transparent border-warning': task.completed,
+            'bg-success text-white border-success': !task.completed }"
+            (click)="changeStateTask()"
+    >{{ task.completed ? 'Undone' : 'Done' }}</button>
+  </div>
+</div>

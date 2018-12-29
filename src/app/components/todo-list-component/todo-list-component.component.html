@@ -1,0 +1,94 @@
+<!--
+ Описание действий:
+ 1) *ngFor="let task of todos; trackBy: identify
+    - Всегда использовать trackBy: identify для ускорения работы перебирающего метода
+      с этим атрибутом ng for не будет переберать весь масив элементов
+      identify(index: number, item: any) {
+    return index && item ;
+    }
+    index && item ; - настраиваеться произвольно по чему нужно трекать н.п item.complete
+    *ngFor="let task of todos; let i = index"
+     - Генериться разметка в зависимости от полученных данных
+     - Далее вызываеться в нужном месте = {{ task.title }} и тд
+     - index текущей итерации - передаем в 4.3
+ 2) [ngClass]="{ 'text-white bg-success' : task.complete, 'text-white bg-danger' : !task.complete }"
+     - В зависимости от task.complete = true либо false применяеться соответстующий класс
+ 3) {{ task.complete ? 'Uncomplete' : 'Complete' }}
+    - Изменяет текст в зависимости от условия
+4)  4.1 (click)="deleteTask(task.id)
+    - удаление по id - с сервера
+    4.2 (click)="deleteTask($event)
+    - событие которое будет обрабатываться в данном случае при клилке
+    - $event - можем передавать событие
+    4.3 (click)="deleteTask(i)
+      - i -можем передавать индекс с текущей итерации
+-->
+<!-- todo 1
+@Передача данных от родительского элемента в дочерний
+ Что бы передать данные с родительсеого элемента в дочерний - нужно подключить деоратор Input - import { Component, OnInit, Input } from '@angular/core';
+@Input() task: Task; в разметке это [task]="todo" - *ngFor="todo of tasks" - с этой же компоненты.
+[task] - название что после @Input, todo - названние с ngFor
+-->
+<!--todo 2
+Что б передать данные от дочернего элемента в родительський необходимо:
+1) в Дочернем элементе подключить EventEmitter и Output
+Output - Декоратор которыей зарезервирует в компоненте события под названием в нашем случае delete и присвоит EventEmitter
+EventEmitter - класс который содержит методы для генарации события в данном случае метод emit который генерирует и распростроняет
+это событие вверх
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+@Output() delete = new EventEmitter();
+в методе this.delete.emit(this.task.id) - передавать можно данные которые нужно передать
+2) Ниже в родительской компоненте вешается (delete)="deleteTask($event)"
+(delete) - навзвание произвольное которое мы дали "Идет после @Output"
+deleteTask() - метод в родительской компоненте
+$event = значению что передавалось от дочернего - в данном случаае this.task.id
+
+
+@Подписка на событие delete у дочернего элемента   (delete)="deleteTask($event)
+@*ngFor    обязаетльно trackBy: identify - перейди на identify
+@Генирация удаления в html (delete)="deleteTask($event)"
+-->
+<todo-item-component *ngFor="let todo of tasks; trackBy: identify"
+                     [task]="todo"
+                     [borderState]="todo.borderState"
+                     (delete)="deleteTask($event)"
+                     (changeState)="changeStateTask($event)"
+                     (edit)="editTask($event)"
+                     (cancelBorder)="cancelEdit($event)"
+></todo-item-component>
+<!--
+Пример 1
+<div class="container mt-5">
+  Добавляем alert для отображения информации что масив todo-list-component есть пустым
+  <div class="alert alert-info" *ngIf="!todos.length">List of todos is empty</div>
+  Generate todo-list-component card
+  <div class="row justify-content-center align-items-center" style="height: 100vh">
+
+    identify(index: number, item: any) {
+    return index && item ;
+    }
+
+    <div class="col-4" *ngFor="let task of todos; trackBy: identify; ">
+      <div class="card"
+           [ngClass]="{ 'text-white bg-success' : task.complete, 'text-white bg-danger' : !task.complete }">
+        <div class="card-body">
+          <h5 class="card-title">{{ task.title }}</h5>
+          <p class="card-text">{{ task.text }}</p>
+
+          В реальном случае должен быть метод который будет давать запрос на сервер
+          в случае с (click)="task.complete = !task.complete"
+
+          <button href="#" class="btn btn-success"
+                  [ngClass]="{ 'bg-success' : !task.complete, 'bg-primary' : task.complete }"
+                  (click)="task.complete = !task.complete"
+          >{{ task.complete ? 'Incomplete' : 'Complete' }} task</button>
+          <button href="#" class="btn btn-danger" (click)="deleteTaskWithId(task.id)" >Delete task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!--Пример 2-->
+

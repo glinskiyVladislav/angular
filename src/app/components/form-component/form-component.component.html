@@ -1,0 +1,78 @@
+<!--
+  1) [(ngModel)]="todo.title" name="title"
+  @Двухфакторная привязка данных (В переменную данные сразу записываються при вводе в форму)
+  - в name передаеться либо свойство в данном случае title
+  либо если вместо todo.title будет переменная то имя переменной
+  <p>Отрабатывает двухфакторная привязка для поля title: {{ todo.title }}</p>
+  2) (ngSubmit)="addTodo()"
+    - @Событие отправки формы
+  3) [disabled]="!todo.text || !todo.title"
+    - @Минимальная валидация на кнопку
+  4) #form="ngForm"
+    @Инициализаия формы в html
+    - #form - локальная переменна
+    - ngForm - это форма в рамках формы на которой вешается этот тег - ее состояние и методы работы с ней
+    Теперь можно обращаться к переменной form н.п передать ее в метод addTodo(form) после чего
+    применить к примеру метод form.reset()
+
+    4.1 Правильный вариант - Либо что б не передавая метод addTodo(form)
+     подключить декоратор ViewChild и инициализировать @ViewChild('form') form;
+     потом обращатсья через this.form
+  5) @Валидация с required и по шаблону: https://www.concretepage.com/angular-2/angular-2-4-pattern-validation-example
+
+6) @Обязательный атрибут novalidate - что бы форма не валидировалась
+7) #taskTitle="ngModel"
+ - @Отслеживание состояние инпута
+ #taskTitle - локальная переменная которая должна по названию отличаться
+ от name и [(ngModel)]
+ Состояния формы:
+ Если элемент ввода еще не получал фокус, то устанавливается класс ng-untouched. Если же поле ввода уже получало фокус, то к нему применяется класс ng-touched. При этом получение фокуса не обязательно должно сопровождаться изменением значения в этом поле.
+Если первоначальное значение в поле ввода было изменено, то устанавливается класс ng-dirty. Если же значение не изменялось с момента загрузки страницы, то к элементу ввода применяется класс ng-pristine
+Если значение в поле ввода корректно, то применяется класс ng-valid. Если же значение некорректно, то применяется класс ng-invalid
+
+Пример- будет ошибка сразу когда изменил значение
+<div class="alert alert-danger" *ngIf="taskTitle.touched && taskTitle.invalid && taskTitle.dirty">Title required</div>
+Пример 2 - сообщение об ошибке выводиться при попытке отправить форму
+<div class="alert alert-danger" *ngIf="taskTitle.touched && taskTitle.invalid && form.submitted">Title required</div>
+Пример 3
+на кнопку поставить
+[disabled]="taskTitle.invalid"
+- @Атрибут required - обязательно к заполнению
+- @Атрибут pattern - для шаблонов - ссылка выше в пункте 5
+
+
+-->
+
+
+<div class="card mb-5">
+  <div class="card-body">
+    <form #form="ngForm" novalidate>
+      <!--Элемент для ввода названия-->
+      <div class="form-group">
+        <label for="inputTite">Title</label>
+        <input type="text"
+               class="form-control"
+               id="inputTite"
+               name="title"
+               [(ngModel)]="title"
+                #taskTitle="ngModel"
+               required
+        >
+      </div>
+      <!-- @*ngIf -->
+      <div class="alert alert-danger" *ngIf="taskTitle.touched && taskTitle.invalid && form.submitted && form.invalid">Title required</div>
+      <!--Элемент для ввода текста-->
+      <div class="form-group">
+        <label for="text">Text</label>
+        <input type="text" class="form-control" id="text" [(ngModel)]="todo.text" name="text">
+      </div>
+      <!--Кнопка для отправление формы-->
+      <button class="btn btn-primary" [disabled]="taskTitle.invalid" *ngIf="!isEdit" (click)="addTask()">Add task</button>
+      <button class="btn btn-primary" [disabled]="taskTitle.invalid" *ngIf="isEdit" (click)="editTask()">Edit task</button>
+      <button class="btn btn-primary" *ngIf="isEdit" (click)="cancelEdit()">Cancel</button>
+    </form>
+    <p>Отрабатывает двухфакторная привязка для поля title: {{ title }}</p>
+    <p>Отрабатывает двухфакторная привязка для поля text: {{ todo.text }}</p>
+  </div>
+</div>
+
