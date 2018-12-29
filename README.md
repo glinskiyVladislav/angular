@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 http://coldfox.ru/article/5b1adc34179f6e050e0ab806/%D0%9A%D0%B0%D0%BA-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C-Angular-c-5-%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8-%D0%B4%D0%BE-6
 Если будет ошибка с map или promise
 нужно удалить папку @types в node modules и выполнить команду npm i --save @types/es6-promise
-
+ 
 @РАБОТА С ФОРМАМИ
 @РАБОТА С СЕРВИСАМИ И HTTP ЗАПРОСАМИ
 @ПЕРЕДАЧА ДАННЫХ МЕЖДУ КОМПОНЕНТАМИ:
