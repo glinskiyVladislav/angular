@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // @Инициализация в компоненте AuthService ; private authService: AuthService
 import { AuthService } from "../../services/auth.service";
-
-import { Router } from "@angular/router";
+// @Отсеживание состояния роутера
+import { Router, Event, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +12,8 @@ import { Router } from "@angular/router";
 export class NavbarComponent implements OnInit {
   isLogin: boolean = false;
   userName: string;
+  // @Отсеживание состояния роутера
+  isPublic: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -19,6 +21,12 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //@Инициализация отслеживания Обязательно event: Event
+    this.router.events.subscribe( (event: Event)  => {
+      if(event instanceof NavigationEnd) {
+        this.isPublic = event.url.indexOf('panel') === -1
+      }
+    });
     // @Check auth state
     this.authService.checkAuth().subscribe(auth => {
       if(auth) {
@@ -28,7 +36,7 @@ export class NavbarComponent implements OnInit {
         this.userName = '';
         this.isLogin = false;
       }
-    })
+    });
   }
 
   logOut() {
@@ -39,4 +47,3 @@ export class NavbarComponent implements OnInit {
   }
 }
 
-// закончил урок 6 часть 2 32 минуты

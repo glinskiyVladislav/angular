@@ -54,6 +54,10 @@ import { AuthService } from "./services/auth.service";
 // @Подключение pipe
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { CurrencyComponent } from './components/currency/currency.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { BasketService } from "./services/basket.service";
+import { ClientHomeComponent } from './components/client-home/client-home.component';
+import { ClientCheckoutComponent } from './components/client-checkout/client-checkout.component';
 
 
 @NgModule({
@@ -76,7 +80,10 @@ import { CurrencyComponent } from './components/currency/currency.component';
     LoginComponent,
     RegisterComponent,
     CustomDatePipe,
-    CurrencyComponent
+    CurrencyComponent,
+    BasketComponent,
+    ClientHomeComponent,
+    ClientCheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +96,7 @@ import { CurrencyComponent } from './components/currency/currency.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [JsonPlaceHolderService, BooksService, IdService, AuthService],
+  providers: [JsonPlaceHolderService, BooksService, IdService, AuthService, BasketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
