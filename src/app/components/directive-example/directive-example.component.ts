@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirectiveExampleComponent implements OnInit {
   color = "yellow";
+  customIf;
   constructor() { }
 
   ngOnInit() {

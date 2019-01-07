@@ -28,7 +28,7 @@
     <h5 appShowDescription>На этом тексте весит деректива appShowDescription. Кликни по мне</h5>
     <p class="card-text" [hidden]="true">Отображаеться через дерективу</p>
   </div>
-
-  <div [customIf]="">custom if</div> 20.14
+  <!--@Пример в html структурной дерективы-->
+  <div *customIf="customIf">custom if</div>
+  <div class="btn btn-primary" (click)="customIf = !customIf">Переключатель дерективы custom if</div>
 </div>
-
