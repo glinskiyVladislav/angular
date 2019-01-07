@@ -59,6 +59,10 @@ import { BasketService } from "./services/basket.service";
 import { ClientHomeComponent } from './components/client-home/client-home.component';
 import { ClientCheckoutComponent } from './components/client-checkout/client-checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { CustomColorDirective } from './directives/custom-color.directive';
+import { DirectiveExampleComponent } from "./components/directive-example/directive-example.component";
+import { ShowDescriptionDirective } from './directives/show-description.directive';
+import { CustomIfDirective } from './directives/custom-if.directive';
 
 
 @NgModule({
@@ -92,7 +96,11 @@ import { OrdersComponent } from './components/orders/orders.component';
     BasketComponent,
     ClientHomeComponent,
     ClientCheckoutComponent,
-    OrdersComponent
+    OrdersComponent,
+    CustomColorDirective,
+    DirectiveExampleComponent,
+    ShowDescriptionDirective,
+    CustomIfDirective
   ],
   imports: [
     BrowserModule,
