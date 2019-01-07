@@ -71,6 +71,13 @@ import { OrdersComponent } from './components/orders/orders.component';
   //   NavbarComponentComponent
   // ],
   declarations: [
+    // Компоненты с прошлых уроков сделано для удобства деплоя
+    TodoListComponentComponent,
+    FormComponentComponent,
+    HomeComponentComponent,
+    TodoItemComponentComponent,
+    NavbarComponentComponent,
+    // Ниже компоненты к book store
     AppComponent,
     AboutComponent,
     AddBookComponent,
