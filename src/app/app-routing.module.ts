@@ -11,6 +11,8 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ClientHomeComponent } from "./components/client-home/client-home.component";
 import { ClientCheckoutComponent } from "./components/client-checkout/client-checkout.component";
+import { OrdersComponent } from "./components/orders/orders.component";
+
 // @Добавление защиты на роуты
 import { AuthGuard } from "./guard/auth.guard";
 import { RegisterComponent } from "./components/register/register.component";
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: '', component: ClientHomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'panel', component: PanelComponent, canActivate:[AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate:[AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate:[AuthGuard] },
   { path: 'addbook', component: AddBookComponent, canActivate:[AuthGuard] },
   { path: 'checkout', component: ClientCheckoutComponent, canActivate:[AuthGuard] },

@@ -1,9 +1,9 @@
 //@Создание сервиса для работы с заказом
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { Book } from "../models/Book";
+import { map } from 'rxjs/operators';
 import { Observable } from "rxjs";
-import { Order } from "../models/order";
+import { Order } from "../models/Order";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,17 @@ export class SalesService {
     public afs: AngularFirestore
   ) {
     this.ordersCollection = this.afs.collection('orders');
+  }
+
+  getOrders() {
+    return this.orders = this.ordersCollection.snapshotChanges().pipe(map(collection => {
+      return collection.map(document => {
+        const data = document.payload.doc.data() as Order;
+        data.id = document.payload.doc.id;
+
+        return data
+      });
+    }));
   }
 
   addNewOrder(order) {
