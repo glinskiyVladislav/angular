@@ -12,10 +12,12 @@ import { LoginComponent } from "./components/login/login.component";
 import { ClientHomeComponent } from "./components/client-home/client-home.component";
 import { ClientCheckoutComponent } from "./components/client-checkout/client-checkout.component";
 import { OrdersComponent } from "./components/orders/orders.component";
+import { DirectiveExampleComponent } from "./components/directive-example/directive-example.component";
 
 // @Добавление защиты на роуты
 import { AuthGuard } from "./guard/auth.guard";
 import { RegisterComponent } from "./components/register/register.component";
+
 
 //@Создание коллекции маршрутов
 // Переход по главной странице это пустая строка
@@ -24,6 +26,7 @@ const routes: Routes = [
   // pathMatch: 'full' - что б путь полностью соответствовал указаному
   // { path: '', redirectTo:'panel', pathMatch: 'full', canActivate:[AuthGuard]},
   { path: '', component: ClientHomeComponent },
+  { path: 'directive', component: DirectiveExampleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'panel', component: PanelComponent, canActivate:[AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate:[AuthGuard] },
