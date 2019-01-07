@@ -62,7 +62,9 @@ export class ClientHomeComponent implements OnInit {
     const newBasketItem = {
       id: book.id,
       price: book.price,
-      name: book.name
+      name: book.name,
+      sum: book.price,
+      count: 1
     };
 
     this.basketService.addItem(newBasketItem).subscribe(book => {
